@@ -1,5 +1,4 @@
 import ExpensesModel from "../../model/expenses.model";
-import UserModel from "../../model/user.model";
 import prisma from "../../../prisma/client";
 
 class ExpensesDao{
@@ -13,7 +12,7 @@ class ExpensesDao{
                     date: expense.date,
                     icon: expense.icon,
                     type: expense.type,
-                    user_id: expense.user.user_id
+                    user_id: expense.user_id
                 }
             });
 
@@ -51,7 +50,7 @@ class ExpensesDao{
                     date: expense.date,
                     icon: expense.icon,
                     type: expense.type,
-                    user_id: expense.user.user_id
+                    user_id: expense.user_id
                 }
             });
 
