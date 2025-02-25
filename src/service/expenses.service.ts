@@ -5,7 +5,7 @@ import Expenses_dao from "../dao/impl/expenses.dao";
 class ExpensesService{
     async saveExpenses(expense:ExpensesModel){
         try {
-            expense.expense_id = "EXPENSE-2"
+            expense.expense_id = await Expenses_dao.generateExpenseId();
             return Expenses_dao.create(expense)
         }catch (err){
             throw  err;

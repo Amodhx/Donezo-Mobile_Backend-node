@@ -69,6 +69,31 @@ class ExpensesDao{
             throw  err;
         }
     }
+    async generateExpenseId(){
+        try {
+            const expenses = await prisma.expense.findMany({
+                select: {
+                    expense_id : true
+                },
+            });
+
+            const sortedExpenses = expenses
+                .map((expense) => {
+                    const numberPart = parseInt(expense.expense_id.split('-')[1]);
+                    return { expense_id: expense.expense_id, numberPart };
+                })
+                .sort((a, b) => b.numberPart - a.numberPart);
+
+            if (sortedExpenses.length === 0) {
+                return 'EXPENSE-1';
+            }
+            const lastIdNumber = sortedExpenses[0].numberPart;
+            const nextIdNumber = lastIdNumber + 1;
+            return `EXPENSE-${nextIdNumber}`;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 const Expenses_dao = new ExpensesDao();
 export default Expenses_dao;
