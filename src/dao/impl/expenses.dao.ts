@@ -29,7 +29,12 @@ class ExpensesDao{
                     expenses: true,
                 },
             });
-            return  userRecord.expenses;
+            if (userRecord){
+                return  userRecord.expenses;
+            }else {
+                return []
+            }
+
         }catch (err) {
 
         }
