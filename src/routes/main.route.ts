@@ -1,8 +1,8 @@
-import {Router} from "express";
+import {Request, Response, Router} from "express";
 import ExpensesRouter from "./sub_routes/expenses.route";
 
 class MainRoute{
-    router
+    router:Router
 
     constructor() {
         this.router = Router();
@@ -11,6 +11,7 @@ class MainRoute{
     initialRoutes(){
         this.router.use('/expenses',ExpensesRouter.router)
     }
+
 }
 const MainRouter = new MainRoute();
 export default MainRouter;
