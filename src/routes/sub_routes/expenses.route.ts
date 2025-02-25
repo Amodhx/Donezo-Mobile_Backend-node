@@ -12,7 +12,7 @@ class ExpensesRoute{
     initialRoutes(){
         this.router.post('/saveExpenses',Authentication_Check.verifyToken,Expenses_controller.saveExpenses)
         this.router.patch('/updateExpenses',Authentication_Check.verifyToken,Expenses_controller.updateExpenses)
-        this.router.post('/deleteExpenses',Authentication_Check.verifyToken,Expenses_controller.deleteExpenses)
+        this.router.delete('/deleteExpenses',Authentication_Check.verifyToken,Expenses_controller.deleteExpenses)
         this.router.get('/getAllExpenses',Authentication_Check.verifyToken,Expenses_controller.getAllExpensesByUser)
     }
 }

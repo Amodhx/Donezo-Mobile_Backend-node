@@ -14,6 +14,9 @@ class JwtService{
         if (user.password != userData.password){
             throw new Error("INVALID PASSWORD")
         }
+        if (!jwtSecretKey){
+            throw new Error("CANT FIND JWT SECRET")
+        }
         return jwt.sign({userId:user.email},jwtSecretKey,{
             expiresIn : '5h'
         })
@@ -26,7 +29,11 @@ class JwtService{
                 email : userMail
             }
         })
+        if (!jwtSecretKey){
+            throw new Error("CANT FIND JWT SECRET")
+        }
         if (!isUserNameValid){
+            user.user_id = "USER-3"
             const savedUser = await User_dao.create(user);
             if (savedUser){
                 return jwt.sign({userId:userMail},jwtSecretKey,{

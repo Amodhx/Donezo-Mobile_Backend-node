@@ -1,5 +1,6 @@
 import {Request, Response, Router} from "express";
 import ExpensesRouter from "./sub_routes/expenses.route";
+import UserRouter from "./sub_routes/user.route";
 
 class MainRoute{
     router:Router
@@ -10,6 +11,7 @@ class MainRoute{
     }
     initialRoutes(){
         this.router.use('/expenses',ExpensesRouter.router)
+        this.router.use('/auth',UserRouter.router)
     }
 
 }
