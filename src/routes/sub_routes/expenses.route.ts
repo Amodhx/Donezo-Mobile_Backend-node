@@ -1,9 +1,9 @@
 import {Router} from "express";
 
 class ExpensesRoute{
-    router;
+    router:Router
     constructor() {
-        this.router = Router;
+        this.router = Router();
         this.initialRoutes();
     }
     initialRoutes(){

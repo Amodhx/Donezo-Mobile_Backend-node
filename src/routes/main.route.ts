@@ -5,7 +5,7 @@ class MainRoute{
     router
 
     constructor() {
-        this.router = Router;
+        this.router = Router();
         this.initialRoutes();
     }
     initialRoutes(){
