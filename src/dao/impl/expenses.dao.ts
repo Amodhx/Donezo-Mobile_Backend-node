@@ -21,10 +21,10 @@ class ExpensesDao{
             throw  err;
         }
     }
-    async getAll(user:UserModel){
+    async getAll(email:string){
         try {
             const userRecord = await prisma.user.findUnique({
-                where: { email: user.email },
+                where: { email: email },
                 include: {
                     expenses: true,
                 },
