@@ -33,7 +33,7 @@ class JwtService{
             throw new Error("CANT FIND JWT SECRET")
         }
         if (!isUserNameValid){
-            user.user_id = "USER-3"
+            user.user_id = await User_dao.generateUserId();
             const savedUser = await User_dao.create(user);
             if (savedUser){
                 return jwt.sign({userId:userMail},jwtSecretKey,{

@@ -43,6 +43,31 @@ class UserDao{
             throw err;
         }
     }
+    async generateUserId(){
+        try {
+            const users = await prisma.user.findMany({
+                select: {
+                    user_id : true
+                },
+            });
+
+            const sortedUsers = users
+                .map((user) => {
+                    const numberPart = parseInt(user.user_id.split('-')[1]);
+                    return { user_id: user.user_id, numberPart };
+                })
+                .sort((a, b) => b.numberPart - a.numberPart);
+
+            if (sortedUsers.length === 0) {
+                return 'USER-1';
+            }
+            const lastIdNumber = sortedUsers[0].numberPart;
+            const nextIdNumber = lastIdNumber + 1;
+            return `USER-${nextIdNumber}`;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 const User_dao = new UserDao();
