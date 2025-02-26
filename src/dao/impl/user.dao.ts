@@ -20,17 +20,21 @@ class UserDao{
     }
     async update(user:UserModel){
         try {
-            const userObj:User = await this.getUserByEmail(user.email);
-            return await prisma.user.update({
-                where : {
-                    user_id : userObj?.user_id
-                },
-                data: {
-                    full_name: userObj?.full_name,
-                    email: userObj?.email,
-                    password: userObj?.password
-                }
-            });
+            const userObj:User|null = await this.getUserByEmail(user.email);
+            if (userObj){
+                return await prisma.user.update({
+                    where : {
+                        user_id : userObj?.user_id
+                    },
+                    data: {
+                        full_name: userObj?.full_name,
+                        email: userObj?.email,
+                        password: userObj?.password
+                    }
+                });
+            }else {
+                throw new Error("CASE TMY JIWITHE!");
+            }
         }catch (err){
             throw err;
         }
