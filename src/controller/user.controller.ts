@@ -22,6 +22,7 @@ class UserController{
         try {
             resp.status(201).send(await UserDao.update(req.body));
         }catch (err){
+            console.log(err)
             resp.status(500).send(err);
         }
     }

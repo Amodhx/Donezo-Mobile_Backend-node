@@ -1,5 +1,7 @@
 import UserModel from "../../model/user.model";
 import prisma from "../../../prisma/client";
+import userController from "../../controller/user.controller";
+import {User} from "@prisma/client";
 
 class UserDao{
     async create(user:UserModel){
@@ -18,14 +20,15 @@ class UserDao{
     }
     async update(user:UserModel){
         try {
+            const userObj:User = await this.getUserByEmail(user.email);
             return await prisma.user.update({
                 where : {
-                    user_id : user.user_id
+                    user_id : userObj?.user_id
                 },
                 data: {
-                    full_name: user.full_name,
-                    email: user.email,
-                    password: user.password
+                    full_name: userObj?.full_name,
+                    email: userObj?.email,
+                    password: userObj?.password
                 }
             });
         }catch (err){
