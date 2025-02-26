@@ -5,6 +5,7 @@ class ExpensesController{
         try {
             resp.status(201).send(await Expenses_service.saveExpenses(req.body));
         }catch (err){
+            console.log(err)
             resp.status(500).send(err);
         }
     }
